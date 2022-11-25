@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Something
 {
@@ -13,8 +12,8 @@ namespace Something
         public Vector3Int Position => _position;
         public Vector3 Direction => _direction;
 
-        internal abstract void selectDestination(Field[,,] env);
+        internal abstract void SelectDestination(Field[,,] env);
 
-        internal abstract void stepIfAble(Field[,,] env);
+        internal abstract void StepIfAble(Field[,,] env);
     }
 }

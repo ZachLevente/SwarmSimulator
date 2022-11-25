@@ -8,10 +8,10 @@ namespace Something
     [Serializable]
     public class ConcreteEntity : Entity
     {
-        private float stepRange = 5.0f;
-        private int viewRange = 6;
-        private float directionAdaptationRate = 0.1f; // 0-1
-        private Vector3 nextDestination;
+        private float _stepRange = 5.0f;
+        private int _viewRange = 6;
+        private float _directionAdaptationRate = 0.1f; // 0-1
+        private Vector3 _nextDestination;
 
         public ConcreteEntity(Vector3Int position, Vector3 direction)
         {
@@ -19,42 +19,42 @@ namespace Something
             _direction = direction;
         }
      
-        internal override void selectDestination(Field[,,] env)
+        internal override void SelectDestination(Field[,,] env)
         {
-            // IEnumerable<Entity> entities = getNearbyEntities(env, viewRange);
-            // updateDirection(entities);
-            // nextDestination = _position + stepRange * _direction;
+            // IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
+            // UpdateDirection(entities);
+            // _nextDestination = _position + _stepRange * _direction;
             _position = new Vector3Int(_position.x+1, _position.y, _position.z);
         }
 
-        internal override void stepIfAble(Field[,,] env)
+        internal override void StepIfAble(Field[,,] env)
         {
-            // Vector3Int closestPos = Vector3Int.RoundToInt(nextDestination);
-            // Field closestField = env.getField(closestPos);
-            // Field currentField = env.getField(_position);
-            // currentField._entity = null;
-            // if (closestField._entity == null)
+            // Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
+            // Field closestField = env.GetField(closestPos);
+            // Field currentField = env.GetField(_position);
+            // currentField.Entity = null;
+            // if (closestField.Entity == null)
             // {
-            //     closestField._entity = this;
+            //     closestField.Entity = this;
             // }
             // else
             // {
             //     // TODO blow up
-            //     currentField._entity = this;
+            //     currentField.Entity = this;
             // }
         }
 
-        private void updateDirection(IEnumerable<Entity> entities)
+        private void UpdateDirection(IEnumerable<Entity> entities)
         {
             Vector3 dirSum = new Vector3(0f, 0f, 0f);
             foreach (Entity entity in entities)
                 dirSum += entity.Direction;
             dirSum /= entities.Count();
-            _direction = dirSum * directionAdaptationRate + _direction * (1.0f - directionAdaptationRate);
+            _direction = dirSum * _directionAdaptationRate + _direction * (1.0f - _directionAdaptationRate);
             _direction.Normalize();
         }
 
-        private IEnumerable<Entity> getNearbyEntities(Field[,,] env, int boxSize)
+        private IEnumerable<Entity> GetNearbyEntities(Field[,,] env, int boxSize)
         {
             List<Entity> results = new List<Entity>();
             int fromX=Math.Max(0, _position.x - boxSize), toX=Math.Min(env.GetLength(0) - 1, _position.x + boxSize);
@@ -64,8 +64,8 @@ namespace Something
             for (int i = fromX; i <= toX; i++)
                 for (int j = fromY; j <= toY; j++)
                     for (int k = fromZ; k <= toZ; k++)
-                        if (env[i,j,k]._entity != null)
-                            results.Add(env[i,j,k]._entity);
+                        if (env[i,j,k].Entity != null)
+                            results.Add(env[i,j,k].Entity);
             return results;
         }
     }

@@ -1,17 +1,16 @@
-using System;
 using UnityEngine;
 
 namespace Something.Controllers
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager _instance;
+        private static GameManager _instance;
         public static GameManager Instance => _instance;
 
-        [SerializeField] private WorldSpaceGridController _worldSpaceGridController;
+        private WorldSpaceGridController _worldSpaceGridController;
         public WorldSpaceGridController WorldSpaceGridController => _worldSpaceGridController;
 
-        [SerializeField] private GameUpdateController _gameTimeController;
+        private GameUpdateController _gameTimeController;
         public GameUpdateController GameTimeController => _gameTimeController;
 
         private void Start()

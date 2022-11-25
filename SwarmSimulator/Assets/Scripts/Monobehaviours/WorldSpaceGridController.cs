@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Something.Controllers
@@ -35,8 +34,6 @@ namespace Something.Controllers
             _gridModel.AddEntity(entity);
             return Instantiate(birdPrefab, transform).Spawn(entity);
         }
-        
-        
 
         #endregion
 

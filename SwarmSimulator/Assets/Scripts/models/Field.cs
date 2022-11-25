@@ -1,16 +1,15 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Something
 {
     [Serializable]
     public class Field
     {
-        [SerializeField] internal Entity _entity = null;
+        [SerializeField] private Entity _entity = null;
 
-        public Entity Entity => _entity;
-        
+        public Entity Entity { get; set; }
+
         internal Field() {}
     }
 }

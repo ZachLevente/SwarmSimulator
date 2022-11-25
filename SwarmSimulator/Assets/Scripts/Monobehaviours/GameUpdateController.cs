@@ -14,7 +14,7 @@ namespace Something.Controllers
         
         public void Step()
         {
-            _controller.step();
+            _controller.Step();
             BirdObjectController.MoveAllBirds();
         }
     }

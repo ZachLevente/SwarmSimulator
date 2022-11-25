@@ -4,45 +4,45 @@ namespace Something
 {
     public class Controller
     {
-        WorldSpaceGrid model;
-        int stepInterval = 300; //ms
+        private readonly WorldSpaceGrid _model;
+        private int _stepInterval = 300; //ms
 
         public Controller(WorldSpaceGrid grid) {
-            model = grid;
-            model.step();
+            _model = grid;
+            _model.Step();
         }
 
-        public void start() {
-            if (running || !stopped)
+        public void Start() {
+            if (_running || !_stopped)
                 return;
-            stopped = true;
-            backgroundTask();
+            _stopped = true;
+            BackgroundTask();
         }
 
-        public void stop() {
-            stopped = true;
+        public void Stop() {
+            _stopped = true;
         }
 
-        public void step() {
-            model.step();
+        public void Step() {
+            _model.Step();
             // TODO update view
         }
 
-        public void reset() {
-            stopped = true;
-            model.reset();
+        public void Reset() {
+            _stopped = true;
+            _model.Reset();
         }
 
-        private bool stopped = true;
-        private bool running = false;
-        private async Task backgroundTask() {
-            running = true;
-            while(!stopped){
-                model.step();
+        private bool _stopped = true;
+        private bool _running = false;
+        private async Task BackgroundTask() {
+            _running = true;
+            while(!_stopped){
+                _model.Step();
                 // TODO update view
-                await Task.Delay(stepInterval);
+                await Task.Delay(_stepInterval);
             }
-            running = false;
+            _running = false;
         }
     }
 }

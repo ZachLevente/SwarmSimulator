@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Something.Controllers
     {
         public Entity Brain { get; private set; }
         
-        private static List<BirdObjectController> _birds = new();
+        private static readonly List<BirdObjectController> _birds = new();
 
         public BirdObjectController Spawn(Entity entity)
         {
