@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Something
 {
@@ -11,6 +12,11 @@ namespace Something
         }
 
         internal override void stepIfAble()
+        {
+            
+        }
+
+        private IEnumerable<Entity> getNearbyEntities()
         {
             
         }
