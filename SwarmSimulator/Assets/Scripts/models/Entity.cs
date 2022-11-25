@@ -4,13 +4,19 @@ using UnityEngine;
 namespace Something
 {
     [Serializable]
-    public abstract class Entity
+    public class Entity
     {
         [SerializeField] protected Vector3Int Position;
         [SerializeField] protected Vector3 Direction;
-        
-        internal abstract void selectDestination(Field[,,] env);
-        internal abstract void stepIfAble();
 
+        internal virtual void selectDestination(Field[,,] env)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal virtual void stepIfAble()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
