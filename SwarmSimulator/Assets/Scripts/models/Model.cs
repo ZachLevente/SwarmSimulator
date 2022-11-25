@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Something
 {
-
-    class Model
+    [Serializable]
+    public class Model
     {
-        Field[,,] fields;
-        List<Entity> entities = new List<Entity>();
+        [SerializeField] private Field[,,] fields;
+        [SerializeField] private List<Entity> entities = new List<Entity>();
 
-        internal Model(int x, int y, int z){
+        internal Model(int x, int y, int z) {
             fields = new Field[x,y,z];
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < y; j++)
@@ -16,14 +18,16 @@ namespace Something
                         fields[i,j,k] = new Field();
         }
 
-        internal void step(){
+        internal void step()
+        {
             foreach (var entity in entities)
                 entity.selectDestination(fields);
             foreach (var entity in entities)
                 entity.stepIfAble();
         }
 
-        internal void reset(){
+        internal void reset()
+        {
             
         }
     }

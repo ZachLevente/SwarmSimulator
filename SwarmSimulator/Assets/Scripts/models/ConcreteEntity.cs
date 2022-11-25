@@ -1,6 +1,9 @@
+using System;
+
 namespace Something
 {
-    class ConcreteEntity : Entity
+    [Serializable]
+    public class ConcreteEntity : Entity
     {
         internal override void selectDestination(Field[,,] env)
         {

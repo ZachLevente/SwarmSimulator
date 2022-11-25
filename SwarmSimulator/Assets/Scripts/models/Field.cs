@@ -1,11 +1,13 @@
+using System;
+using UnityEngine;
+
 namespace Something
 {
-    class Field
+    [Serializable]
+    public class Field
     {
-        Entity? entity = null;
-        internal Field()
-        {
-            
-        }
+        [SerializeField] private Entity? entity = null;
+        
+        internal Field() {}
     }
 }

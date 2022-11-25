@@ -1,9 +1,14 @@
+using System;
+using UnityEngine;
+
 namespace Something
 {
-    abstract class Entity
+    [Serializable]
+    public abstract class Entity
     {
-        int x, y, z;
-        int dirX, dirY, dirZ; // -1 | 0 | 1
+        [SerializeField] protected Vector3Int Position;
+        [SerializeField] protected Vector3 Direction;
+        
         internal abstract void selectDestination(Field[,,] env);
         internal abstract void stepIfAble();
 
