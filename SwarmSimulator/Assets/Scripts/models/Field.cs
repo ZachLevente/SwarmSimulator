@@ -6,7 +6,7 @@ namespace Something
     [Serializable]
     public class Field
     {
-        [SerializeField] private Entity? entity = null;
+        [SerializeField] internal Entity? entity = null;
         
         internal Field() {}
     }
