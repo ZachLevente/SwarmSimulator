@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 namespace Something
 {
     [Serializable]
-    public class Entity
+    public abstract class Entity
     {
         [SerializeField] protected Vector3Int _position;
         [SerializeField] protected Vector3 _direction;
@@ -13,14 +13,8 @@ namespace Something
         public Vector3Int Position => _position;
         public Vector3 Direction => _direction;
 
-        internal virtual void selectDestination(Field[,,] env)
-        {
-            throw new NotImplementedException();
-        }
+        internal abstract void selectDestination(Field[,,] env);
 
-        internal virtual void stepIfAble(Field[,,] env)
-        {
-            throw new NotImplementedException();
-        }
+        internal abstract void stepIfAble(Field[,,] env);
     }
 }
