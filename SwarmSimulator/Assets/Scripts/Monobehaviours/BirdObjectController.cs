@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Something
+namespace Something.Controllers
 {
     public class BirdObjectController : MonoBehaviour
     {
