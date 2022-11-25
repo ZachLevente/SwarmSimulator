@@ -13,7 +13,7 @@ namespace Something.Controllers
 
         public void CreateStandardSizeGrid()
         {
-            KillAllChildren();
+            transform.KillAllChildren();
             CreateGrid(createdGridSize.x, createdGridSize.y, new System.Random().Next(5));
         }
 
@@ -29,13 +29,6 @@ namespace Something.Controllers
             for (int j = 0; j < y; j++)
             for (int k = 0; k < z; k++)
                 Instantiate(gridDotPrefab, new Vector3(i, j, k), Quaternion.identity, gameObject.transform);
-        }
-
-        private void KillAllChildren()
-        {
-            foreach (Transform child in transform) {
-                Destroy(child.gameObject);
-            }
         }
 
         #endregion
