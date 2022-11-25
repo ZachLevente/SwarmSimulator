@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Something
 {
     class ConcreteEntity : Entity
@@ -8,6 +10,11 @@ namespace Something
         }
 
         internal override void stepIfAble()
+        {
+            
+        }
+
+        private IEnumerable<Entity> getNearbyEntities()
         {
             
         }
