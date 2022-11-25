@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+
 namespace Something
 {
+
     class Model
     {
         Field[,,] fields;
@@ -14,7 +17,6 @@ namespace Something
         }
 
         internal void step(){
-            Console.WriteLine("Model step");
             foreach (var entity in entities)
                 entity.selectDestination(fields);
             foreach (var entity in entities)
