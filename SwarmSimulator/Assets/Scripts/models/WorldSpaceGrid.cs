@@ -23,7 +23,7 @@ namespace Something
             foreach (var entity in entities)
                 entity.selectDestination(fields);
             foreach (var entity in entities)
-                entity.stepIfAble();
+                entity.stepIfAble(fields);
         }
 
         internal void reset()

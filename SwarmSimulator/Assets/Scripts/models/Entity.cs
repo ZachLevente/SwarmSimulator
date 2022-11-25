@@ -7,14 +7,14 @@ namespace Something
     public class Entity
     {
         [SerializeField] protected Vector3Int Position;
-        [SerializeField] protected Vector3 Direction;
+        [SerializeField] internal Vector3 Direction;
 
         internal virtual void selectDestination(Field[,,] env)
         {
             throw new NotImplementedException();
         }
 
-        internal virtual void stepIfAble()
+        internal virtual void stepIfAble(Field[,,] env)
         {
             throw new NotImplementedException();
         }
