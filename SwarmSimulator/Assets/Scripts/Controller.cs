@@ -4,11 +4,11 @@ namespace Something
 {
     public class Controller
     {
-        Model model;
+        WorldSpaceGrid model;
         int stepInterval = 300; //ms
 
         public Controller(){
-            model = new Model(4,5,6);
+            model = new WorldSpaceGrid(4,5,6);
             model.step();
         }
 

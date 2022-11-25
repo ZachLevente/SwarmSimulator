@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Something
 {
     [Serializable]
-    public class Model
+    public class WorldSpaceGrid
     {
         [SerializeField] private Field[,,] fields;
         [SerializeField] private List<Entity> entities = new List<Entity>();
 
-        internal Model(int x, int y, int z) {
+        internal WorldSpaceGrid(int x, int y, int z) {
             fields = new Field[x,y,z];
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < y; j++)
