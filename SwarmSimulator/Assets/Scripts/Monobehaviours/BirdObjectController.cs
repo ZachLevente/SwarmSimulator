@@ -19,7 +19,7 @@ namespace Something.Controllers
         public void Move()
         {
             transform.position = GameManager.Instance.WorldSpaceGridController.GetGameWorldPosition(Brain.Position);
-            //TODO rotation
+            transform.LookAt(transform.position + Brain.Direction);
         }
         
         public static void MoveAllBirds() => _birds.ForEach(b => b.Move());
