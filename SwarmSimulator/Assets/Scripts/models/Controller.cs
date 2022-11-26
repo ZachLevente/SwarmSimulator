@@ -8,7 +8,6 @@ namespace Something
 
         public Controller(WorldSpaceGrid grid) {
             _model = grid;
-            _model.Step();
         }
 
         public void Step() {
