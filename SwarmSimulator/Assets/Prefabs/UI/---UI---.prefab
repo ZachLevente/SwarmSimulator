@@ -374,6 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vec3popup: {fileID: 4612978812456692980}
+  OkButton: {fileID: 3863771733109816005}
+  modifiedEntity: {fileID: 0}
 --- !u!1 &896525783711832130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1095,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c534bab0f205174c9163140942ce319, type: 3}
+--- !u!114 &3863771733109816005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7755587940455145783, guid: 2c534bab0f205174c9163140942ce319, type: 3}
+  m_PrefabInstance: {fileID: 6791355462438968306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4612978812456692980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2178381048058427142, guid: 2c534bab0f205174c9163140942ce319, type: 3}

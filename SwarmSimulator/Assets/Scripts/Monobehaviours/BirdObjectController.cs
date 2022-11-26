@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Something.UI;
 using UnityEngine;
@@ -34,7 +33,7 @@ namespace Something.Controllers
 
         private void OnMouseDown()
         {
-            BirdClickHandler.BirdClicked(Brain);
+            BirdClickHandler.BirdClicked(this);
         }
 
         #endregion

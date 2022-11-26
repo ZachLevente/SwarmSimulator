@@ -1,13 +1,12 @@
 using Something.Controllers;
-using UnityEngine;
 
 namespace Something.UI
 {
     public class BirdClickHandler
     {
-        public static void BirdClicked(Entity entity)
+        public static void BirdClicked(BirdObjectController entity)
         {
-            GameManager.Instance.UiController.ShowPositionPopup(entity.Position);
+            GameManager.Instance.UiController.ShowEntityPopup(entity);
         }
     }
 }
