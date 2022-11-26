@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 using Something.Controllers;
 
 namespace Something
@@ -37,19 +38,28 @@ namespace Something
         }
 
         public void AddRandomBird(){
-            Vector3Int pos = Vector3Int.zero;
-            Vector3Int gridSize = _worldSpaceGridController.GetGrid().Size;
-            do{
-                pos.x = Random.Range(0, gridSize.x-1);
-                pos.y = Random.Range(0, gridSize.y-1);
-                pos.z = Random.Range(0, gridSize.z-1);
-            } while(_worldSpaceGridController.GetGrid().Fields[pos.x, pos.y, pos.z].Entity != null);
+            Field[,,] fields = _worldSpaceGridController.GetGrid().Fields;
+            List<Vector3Int> freeSpots = FindEmptySpots(fields);
+            if (freeSpots.Count <= 0)
+                return;
+
+            Vector3Int chosen = freeSpots[Random.Range(0, freeSpots.Count-1)];
             
             Vector3 dir = Random.insideUnitSphere;
             dir.Normalize();
 
-            _worldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, _defaultBehaviour));
+            _worldSpaceGridController.AddEntity(new ConcreteEntity(chosen, dir, _defaultBehaviour));
         }
-        
+
+        private List<Vector3Int> FindEmptySpots(Field[,,] fields){
+            List<Vector3Int> results = new List<Vector3Int>();
+            for (int i = 0; i < fields.GetLength(0); i++)
+                for (int j = 0; j < fields.GetLength(1); j++)
+                    for (int k = 0; k < fields.GetLength(2); k++)
+                        if (fields[i, j, k].Entity == null)
+                            results.Add(new Vector3Int(i, j, k));
+            return results;
+        }
+
     }
 }
