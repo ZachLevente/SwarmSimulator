@@ -12,8 +12,8 @@ namespace Something.Controllers
         public WorldSpaceGridController WorldSpaceGridController => _worldSpaceGridController;
         private WorldSpaceGridController _worldSpaceGridController;
 
-        public GameUpdateController GameTimeController => _gameTimeController;
-        private GameUpdateController _gameTimeController;
+        public GameUpdateController GameUpdateController => _gameUpdateController;
+        private GameUpdateController _gameUpdateController;
 
         public UiController UiController => _uiController;
         private UiController _uiController;
@@ -24,10 +24,10 @@ namespace Something.Controllers
         {
             _instance = this;
             _worldSpaceGridController = GetComponentInChildren<WorldSpaceGridController>();            
-            _gameTimeController = GetComponentInChildren<GameUpdateController>();
+            _gameUpdateController = GetComponentInChildren<GameUpdateController>();
             _uiController = GetComponentInChildren<UiController>();
             string jsonString = File.ReadAllText ("Assets/json/default_entity_behaviour.json");
-            EntityBehaviour _defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
+            _defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
         }
 
         public void StartNewGame()
@@ -59,7 +59,7 @@ namespace Something.Controllers
                 WorldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, behaviour));
             }
 
-            GameTimeController.SetGameState(WorldSpaceGridController.GetGrid());
+            GameUpdateController.SetGameState(WorldSpaceGridController.GetGrid());
         }
 
         private EntityBehaviour FindBehaviourWithName(string name, EntityBehaviour[] behaviours){
@@ -69,7 +69,7 @@ namespace Something.Controllers
             return null;
         }
 
-        private void AddRandomBird(){
+        public void AddRandomBird(){
             Vector3Int pos = Vector3Int.zero;
             Vector3Int gridSize = _worldSpaceGridController.GetGrid().Size;
             do{

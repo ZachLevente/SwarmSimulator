@@ -130,61 +130,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1130054310579043020, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1161595524022674064, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: createdGridSize.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1161595524022674064, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: createdGridSize.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1161595524022674064, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: createdGridSize.z
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 1215785191272080893, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
       propertyPath: m_Name
       value: --- Swarm Simulator ---
       objectReference: {fileID: 0}
-    - target: {fileID: 2069671903809699463, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
+    - target: {fileID: 3909411383606425162, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2073294339}
+    - target: {fileID: 3909411383606425162, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddRandomBird
       objectReference: {fileID: 0}
-    - target: {fileID: 2069671903809699463, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2069671903809699463, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3909411383606425163, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3909411383606425163, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3909411383606425163, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463002052249221738, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463002052249221738, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7463002052249221738, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+    - target: {fileID: 3909411383606425162, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Something.Controllers.GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8273120061845022330, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
       propertyPath: m_RootOrder
@@ -471,3 +431,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2073294339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3441399759366041151, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
+  m_PrefabInstance: {fileID: 430075582}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e1c3dc17e34a0f979e37707c28d0b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

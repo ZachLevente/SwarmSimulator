@@ -1,4 +1,5 @@
 using Something.Controllers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +9,11 @@ namespace Something.UI
     {
         [SerializeField] private Vector3InputPanel vec3popup;
         [SerializeField] private Button OkButton;
+        [SerializeField] private TMP_Text ContinueButtonText;
         
         private BirdObjectController modifiedEntity = null;
+        private bool continous = false;
+        
 
         public void Start()
         {
@@ -38,6 +42,13 @@ namespace Something.UI
                 modifiedEntity.Brain.Position = vec3popup.GetIntegerData();
                 modifiedEntity.Move();
             }
+        }
+
+        public void ToggleGameContinuity()
+        {
+            continous = !continous;
+            ContinueButtonText.text = continous ? "Pause" : "Continue";
+            GameManager.Instance.GameUpdateController.SetAutoStep(continous);
         }
     }
 }
