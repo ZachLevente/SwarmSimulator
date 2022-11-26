@@ -10,8 +10,10 @@ namespace Something
     {
         private float _stepRange = 3.0f;
         private int _viewRange = 6;
-        private float _directionAdaptationRate = 0.1f; // 0-1
+        private float _directionAdaptationRate = 0.9f; // 0-1
+        private float _wallRepulsiveness = 1.0f;
         private Vector3 _nextDestination;
+        private Vector3 _nextDirection;
 
         public ConcreteEntity(Vector3Int position, Vector3 direction)
         {
@@ -22,8 +24,7 @@ namespace Something
      
         internal override void SelectDestination(Field[,,] env)
         {
-            IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
-            UpdateDirection(entities);
+            _nextDirection = CalculateNextDirection(env);
             _nextDestination = _position + _stepRange * _direction;
         }
 
@@ -34,6 +35,8 @@ namespace Something
             Field closestField = env.GetField(closestPos);
             Field currentField = env.GetField(_position);
             currentField.Entity = null;
+            _direction =_nextDirection;
+
             if (closestField.Entity == null)
             {
                 closestField.Entity = this;
@@ -46,16 +49,47 @@ namespace Something
             }
         }
 
-        private void UpdateDirection(IEnumerable<Entity> entities)
+        private Vector3 CalculateNextDirection(Field[,,] env)
         {
-            if (entities.Count() == 0)
-                return;
-            Vector3 dirSum = new Vector3(0f, 0f, 0f);
-            foreach (Entity entity in entities)
-                dirSum += entity.Direction;
-            dirSum /= entities.Count();
-            _direction = dirSum * _directionAdaptationRate + _direction * (1.0f - _directionAdaptationRate);
-            _direction.Normalize();
+            Vector3 newDir = _direction;
+
+            // Neighbours
+            IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
+            if (entities.Count() > 0)
+            {
+                Vector3 dirSum = new Vector3(0f, 0f, 0f);
+                foreach (Entity entity in entities)
+                    dirSum += entity.Direction;
+                dirSum /= entities.Count();
+                newDir = dirSum * _directionAdaptationRate + _direction * (1.0f - _directionAdaptationRate);
+            }
+
+            // Walls
+            Vector3Int wallPushBack = Vector3Int.zero;
+            wallPushBack.x = GetWallPushBack(_position.x, 0, env.GetLength(0));
+            wallPushBack.y = GetWallPushBack(_position.y, 0, env.GetLength(1));
+            wallPushBack.z = GetWallPushBack(_position.z, 0, env.GetLength(2));
+
+            newDir += _wallRepulsiveness * (Vector3) wallPushBack;
+
+            newDir.Normalize();
+            return newDir;
+        }
+
+        private int GetWallPushBack(int value, int min, int max)
+        {
+            int push = 0;
+            if (value + _viewRange > max)
+                push = max - (value + _viewRange);
+            if (value - _viewRange < min)
+                push = min - (value - _viewRange);
+            
+            bool negative = push < 0;
+            push = push * push;
+            if (negative)
+                return -push;
+            else
+                return push;
         }
 
         private IEnumerable<Entity> GetNearbyEntities(Field[,,] env, int boxSize)

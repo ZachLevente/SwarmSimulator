@@ -29,8 +29,10 @@ namespace Something.Controllers
         {
             WorldSpaceGridController.CreateNewStandardSizeGrid();
             WorldSpaceGridController.AddEntity(new ConcreteEntity(Vector3Int.one, Vector3.one));
+            WorldSpaceGridController.AddEntity(new ConcreteEntity(Vector3Int.zero, Vector3.right));
             
             return WorldSpaceGridController.GetGrid();
         }
+
     }
 }
