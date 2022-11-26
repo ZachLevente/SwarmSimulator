@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Something.Controllers
@@ -42,6 +43,13 @@ namespace Something.Controllers
         {
             _gridModel.AddEntity(entity);
             return Instantiate(birdPrefab, transform).Spawn(entity);
+        }
+
+        public void AddRandomEntity()
+        {
+            var entity = new ConcreteEntity(_gridModel.Size.ScaleDownRandomly(), Vector3.one.ScaleDownRandomly());
+            _gridModel.AddEntity(entity);
+            Instantiate(birdPrefab, transform).Spawn(entity);
         }
 
         #endregion

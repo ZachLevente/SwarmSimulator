@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 896525783398905411, guid: c0a46cb21190a6047915242cd6d3a1bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CreateNewStandardSizeGrid
+      value: AddRandomEntity
       objectReference: {fileID: 0}
     - target: {fileID: 896525783398905411, guid: c0a46cb21190a6047915242cd6d3a1bb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

@@ -13,7 +13,12 @@ namespace Something
         //TODO should be a read-only copy
         public Field[,,] Fields => _fields;
 
-        public WorldSpaceGrid(int x, int y, int z) {
+        public Vector3Int Size => _size;
+        private Vector3Int _size;
+
+        public WorldSpaceGrid(int x, int y, int z)
+        {
+            _size = new Vector3Int(x, y, z);
             _fields = new Field[x,y,z];
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < y; j++)

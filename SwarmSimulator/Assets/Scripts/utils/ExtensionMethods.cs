@@ -1,6 +1,7 @@
 using UnityEngine;
 using Something;
 using System;
+using Random = UnityEngine.Random;
 
 public static class ExtensionMethods
 {
@@ -21,5 +22,15 @@ public static class ExtensionMethods
         }
         
         return transform;
+    }
+
+    public static Vector3 ScaleDownRandomly(this Vector3 original)
+    {
+        return new Vector3(Random.Range(0, original.x-1), Random.Range(0, original.y-1), Random.Range(0, original.z-1));
+    }
+
+    public static Vector3Int ScaleDownRandomly(this Vector3Int original)
+    {
+        return new Vector3Int(Random.Range(0, original.x-1), Random.Range(0, original.y-1), Random.Range(0, original.z-1));
     }
 }
