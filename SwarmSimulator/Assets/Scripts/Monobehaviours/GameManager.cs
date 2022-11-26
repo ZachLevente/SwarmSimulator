@@ -18,19 +18,22 @@ namespace Something.Controllers
         public UiController UiController => _uiController;
         private UiController _uiController;
 
+        private EntityBehaviour _defaultBehaviour;
+
         private void Start()
         {
             _instance = this;
             _worldSpaceGridController = GetComponentInChildren<WorldSpaceGridController>();            
             _gameTimeController = GetComponentInChildren<GameUpdateController>();
             _uiController = GetComponentInChildren<UiController>();
+            string jsonString = File.ReadAllText ("Assets/json/default_entity_behaviour.json");
+            EntityBehaviour _defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
         }
 
         public void StartNewGame()
         {
-            string jsonString = File.ReadAllText ("Assets/json/default_entity_behaviour.json");
-            EntityBehaviour defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
-            jsonString = File.ReadAllText ("Assets/json/env.json");
+            
+            string jsonString = File.ReadAllText ("Assets/json/env.json");
             Environment env = Environment.CreateFromJSON(jsonString);
             try
             {
@@ -48,10 +51,10 @@ namespace Something.Controllers
                 EntityBehaviour behaviour = FindBehaviourWithName(EntityData.Behaviour, env.Behaviours);
                 if(behaviour == null){
                     Debug.Log($"EntityBehaviour with name\"{EntityData.Behaviour}\" not found. The default will be used instead.");
-                    behaviour = defaultBehaviour;
+                    behaviour = _defaultBehaviour;
                 }
                 Vector3Int pos = new Vector3Int(EntityData.X, EntityData.Y, EntityData.Z);
-                Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+                Vector3 dir = Random.insideUnitSphere;
                 dir.Normalize();
                 WorldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, behaviour));
             }
@@ -66,13 +69,19 @@ namespace Something.Controllers
             return null;
         }
 
-        // private WorldSpaceGrid CreateExampleGameState()
-        // {
-        //     WorldSpaceGridController.CreateNewStandardSizeGrid();
-        //     WorldSpaceGridController.AddEntity(new ConcreteEntity(Vector3Int.one, Vector3.one));
-        //     WorldSpaceGridController.AddEntity(new ConcreteEntity(Vector3Int.zero, Vector3.right));
+        private void AddRandomBird(){
+            Vector3Int pos = Vector3Int.zero;
+            Vector3Int gridSize = _worldSpaceGridController.GetGrid().Size;
+            do{
+                pos.x = Random.Range(0, gridSize.x-1);
+                pos.y = Random.Range(0, gridSize.y-1);
+                pos.z = Random.Range(0, gridSize.z-1);
+            } while(_worldSpaceGridController.GetGrid().Fields[pos.x, pos.y, pos.z].Entity != null);
             
-        //     return WorldSpaceGridController.GetGrid();
-        // }
+            Vector3 dir = Random.insideUnitSphere;
+            dir.Normalize();
+
+             WorldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, _defaultBehaviour));
+        }
     }
 }

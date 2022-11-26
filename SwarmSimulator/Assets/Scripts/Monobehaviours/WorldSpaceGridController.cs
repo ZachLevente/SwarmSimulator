@@ -45,13 +45,6 @@ namespace Something.Controllers
             return Instantiate(birdPrefab, transform).Spawn(entity);
         }
 
-        public void AddRandomEntity()
-        {
-            var entity = new ConcreteEntity(_gridModel.Size.ScaleDownRandomly(), Vector3.one.ScaleDownRandomly());
-            _gridModel.AddEntity(entity);
-            Instantiate(birdPrefab, transform).Spawn(entity);
-        }
-
         #endregion
 
         #region Private Implementation
