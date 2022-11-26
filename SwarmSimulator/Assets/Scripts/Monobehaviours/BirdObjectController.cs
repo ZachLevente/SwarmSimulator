@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Something.UI;
 using UnityEngine;
 
 namespace Something.Controllers
@@ -29,6 +31,11 @@ namespace Something.Controllers
         private void OnEnable() => _birds.Add(this);
 
         private void OnDisable() => _birds.Remove(this);
+
+        private void OnMouseDown()
+        {
+            BirdClickHandler.BirdClicked(Brain);
+        }
 
         #endregion
     }

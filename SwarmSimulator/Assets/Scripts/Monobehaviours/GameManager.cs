@@ -1,3 +1,4 @@
+using Something.UI;
 using UnityEngine;
 
 namespace Something.Controllers
@@ -13,11 +14,15 @@ namespace Something.Controllers
         private GameUpdateController _gameTimeController;
         public GameUpdateController GameTimeController => _gameTimeController;
 
+        private UiController _uiController;
+        public UiController UiController => _uiController;
+
         private void Start()
         {
             _instance = this;
             _worldSpaceGridController = GetComponentInChildren<WorldSpaceGridController>();            
-            _gameTimeController = GetComponentInChildren<GameUpdateController>();            
+            _gameTimeController = GetComponentInChildren<GameUpdateController>();
+            _uiController = GetComponentInChildren<UiController>();
         }
 
         public void StartNewGame()
@@ -33,6 +38,5 @@ namespace Something.Controllers
             
             return WorldSpaceGridController.GetGrid();
         }
-
     }
 }

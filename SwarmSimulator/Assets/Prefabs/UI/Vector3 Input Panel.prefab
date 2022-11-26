@@ -481,10 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0498a517cdcf540bb956ff5c78e3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 6395164154261773537}
   fieldX: {fileID: 4122787762602653363}
   fieldY: {fileID: 3921496235914452940}
   fieldZ: {fileID: 7375272087847795760}
   _allowDecimals: 0
+  Label: 'Values:'
 --- !u!1 &1692122317324197083
 GameObject:
   m_ObjectHideFlags: 0
