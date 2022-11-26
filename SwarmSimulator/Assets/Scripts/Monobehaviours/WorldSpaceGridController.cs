@@ -4,10 +4,13 @@ namespace Something.Controllers
 {
     public class WorldSpaceGridController : MonoBehaviour
     {
+        [SerializeField] private bool visualGrid = false;
         [SerializeField] private GameObject gridDotPrefab;
         [SerializeField] private BirdObjectController birdPrefab;
         
         [SerializeField] private Vector3Int createdGridSize = new Vector3Int(50, 50, 50);
+        [SerializeField] private Vector3 gridSpacing = new Vector3(1, 1, 1);
+        
         private WorldSpaceGrid _gridModel;
         private GameObject[,,] _dots;
 
@@ -20,7 +23,7 @@ namespace Something.Controllers
 
         public Vector3 GetGameWorldPosition(Vector3Int gridPos)
         {
-            return _dots[gridPos.x, gridPos.y, gridPos.z].transform.position;
+            return Vector3.Scale(gridPos, gridSpacing);
         }
 
         public void CreateNewStandardSizeGrid()
@@ -41,13 +44,16 @@ namespace Something.Controllers
 
         private void CreateGrid(int x, int y, int z)
         {
-            _dots = new GameObject[x, y, z];
             _gridModel = new WorldSpaceGrid(x, y, z);
 
-            for (int i = 0; i < x; i++)
-            for (int j = 0; j < y; j++)
-            for (int k = 0; k < z; k++)
-                _dots[i,j,k] = Instantiate(gridDotPrefab, new Vector3(i, j, k), Quaternion.identity, gameObject.transform);
+            if (visualGrid)
+            {
+                _dots = new GameObject[x, y, z];
+                for (int i = 0; i < x; i++) for (int j = 0; j < y; j++) for (int k = 0; k < z; k++)
+                    _dots[i,j,k] = Instantiate(gridDotPrefab, 
+                        Vector3.Scale(new Vector3(i, j, k), gridSpacing), 
+                        Quaternion.identity, gameObject.transform);
+            }
         }
 
         #endregion
