@@ -15,6 +15,7 @@ namespace Something
         public void Start(Environment env){
             string jsonString = File.ReadAllText ("Assets/json/default_entity_behaviour.json");
             _defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
+            _defaultBehaviour.validate();
 
             foreach (var EntityData in env.Entities)
             {

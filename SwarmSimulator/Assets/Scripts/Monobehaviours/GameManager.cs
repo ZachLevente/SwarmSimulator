@@ -34,14 +34,7 @@ namespace Something.Controllers
             
             string jsonString = File.ReadAllText ("Assets/json/env.json");
             Environment env = Environment.CreateFromJSON(jsonString);
-            try
-            {
-                env.validate();
-            }
-            catch (EnvironmentValidationException e)
-            {
-                Debug.LogError(e.Message);
-            }
+            env.validate();
 
             WorldSpaceGridController.CreateNewGrid(env.X, env.Y, env.Z);
 
