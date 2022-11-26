@@ -10,8 +10,10 @@ namespace Something
     {
         private float _stepRange = 3.0f;
         private int _viewRange = 6;
+        private int _wallViewRange = 6;
         private float _directionAdaptationRate = 0.9f; // 0-1
         private float _wallRepulsiveness = 1.0f;
+        private float _groupPull = 1.0f;
         private Vector3 _nextDestination;
         private Vector3 _nextDirection;
 
@@ -53,24 +55,36 @@ namespace Something
         {
             Vector3 newDir = _direction;
 
-            // Neighbours
-            IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
-            if (entities.Count() > 0)
+            // Direction of close entities
+            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(env, _viewRange);
+            if (closeEntities.Count() > 0)
             {
-                Vector3 dirSum = new Vector3(0f, 0f, 0f);
-                foreach (Entity entity in entities)
+                Vector3 dirSum = Vector3.zero;
+                foreach (Entity entity in closeEntities)
                     dirSum += entity.Direction;
-                dirSum /= entities.Count();
-                newDir = dirSum * _directionAdaptationRate + _direction * (1.0f - _directionAdaptationRate);
+                dirSum /= closeEntities.Count();
+                newDir = dirSum * _directionAdaptationRate + newDir * (1.0f - _directionAdaptationRate);
             }
 
             // Walls
-            Vector3Int wallPushBack = Vector3Int.zero;
+            Vector3 wallPushBack = Vector3.zero;
             wallPushBack.x = GetWallPushBack(_position.x, 0, env.GetLength(0));
             wallPushBack.y = GetWallPushBack(_position.y, 0, env.GetLength(1));
             wallPushBack.z = GetWallPushBack(_position.z, 0, env.GetLength(2));
+            newDir += _wallRepulsiveness * wallPushBack;
 
-            newDir += _wallRepulsiveness * (Vector3) wallPushBack;
+            // NOTE Could work with real groups instead of close entities
+            // NOTE Can be merged with direction part for better performance if needed
+            // Center of group (close entities)
+            if (closeEntities.Count() > 0)
+            {
+                Vector3 posSum = Vector3.zero;
+                foreach (Entity entity in closeEntities)
+                    posSum += entity.Position;
+                posSum += this._position;
+                Vector3 center = posSum / (closeEntities.Count()+1);
+                newDir += (center - _position) * _groupPull;
+            }
 
             newDir.Normalize();
             return newDir;
@@ -79,10 +93,10 @@ namespace Something
         private int GetWallPushBack(int value, int min, int max)
         {
             int push = 0;
-            if (value + _viewRange > max)
-                push = max - (value + _viewRange);
-            if (value - _viewRange < min)
-                push = min - (value - _viewRange);
+            if (value + _wallViewRange > max)
+                push = max - (value + _wallViewRange);
+            if (value - _wallViewRange < min)
+                push = min - (value - _wallViewRange);
             
             bool negative = push < 0;
             push = push * push;
@@ -92,7 +106,7 @@ namespace Something
                 return push;
         }
 
-        private IEnumerable<Entity> GetNearbyEntities(Field[,,] env, int boxSize)
+        private IEnumerable<Entity> GetOtherNearbyEntities(Field[,,] env, int boxSize)
         {
             List<Entity> results = new List<Entity>();
             int fromX=Math.Max(0, _position.x - boxSize), toX=Math.Min(env.GetLength(0) - 1, _position.x + boxSize);
@@ -104,6 +118,7 @@ namespace Something
                     for (int k = fromZ; k <= toZ; k++)
                         if (env[i,j,k].Entity != null)
                             results.Add(env[i,j,k].Entity);
+            results.Remove(this);
             return results;
         }
     }
