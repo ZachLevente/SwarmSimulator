@@ -30,6 +30,7 @@ namespace Something
         internal override void StepIfAble(Field[,,] env)
         {
             Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
+            env.ClampCoords(ref closestPos);
             Field closestField = env.GetField(closestPos);
             Field currentField = env.GetField(_position);
             currentField.Entity = null;
