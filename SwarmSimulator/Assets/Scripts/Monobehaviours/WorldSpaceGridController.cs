@@ -32,6 +32,12 @@ namespace Something.Controllers
             CreateGrid(createdGridSize.x, createdGridSize.y, createdGridSize.z);
         }
 
+        public void CreateNewGrid(int x, int y, int z)
+        {
+            transform.KillAllChildren();
+            CreateGrid(x, y, z);
+        }
+
         public BirdObjectController AddEntity(Entity entity)
         {
             _gridModel.AddEntity(entity);

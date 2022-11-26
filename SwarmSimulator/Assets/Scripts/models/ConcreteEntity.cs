@@ -8,19 +8,25 @@ namespace Something
     [Serializable]
     public class ConcreteEntity : Entity
     {
-        private float _stepRange = 3.0f;
-        private int _viewRange = 6;
-        private int _wallViewRange = 6;
-        private float _directionAdaptationRate = 0.9f; // 0-1
-        private float _wallRepulsiveness = 1.0f;
-        private float _groupPull = 1.0f;
+        private float _stepRange;
+        private int _viewRange;
+        private int _wallViewRange;
+        private float _directionAdaptationRate; // 0-1
+        private float _wallRepulsiveness;
+        private float _groupPull;
         private Vector3 _nextDestination;
         private Vector3 _nextDirection;
 
-        public ConcreteEntity(Vector3Int position, Vector3 direction)
+        public ConcreteEntity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
         {
             _position = position;
             _direction = direction;
+            _stepRange = behaviour.StepRange;
+            _viewRange = behaviour.ViewRange;
+            _wallViewRange = behaviour.WallViewRange;
+            _directionAdaptationRate = behaviour.DirectionAdaptationRate;
+            _wallRepulsiveness = behaviour.WallRepulsiveness;
+            _groupPull = behaviour.GroupPull;
             _direction.Normalize();
         }
      

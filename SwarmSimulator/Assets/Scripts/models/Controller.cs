@@ -24,6 +24,7 @@ namespace Something
         }
 
         public void Step() {
+            
             _model.Step();
             // TODO update view
         }
