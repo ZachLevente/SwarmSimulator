@@ -8,7 +8,7 @@ namespace Something
     [Serializable]
     public class ConcreteEntity : Entity
     {
-        private float _stepRange = 5.0f;
+        private float _stepRange = 3.0f;
         private int _viewRange = 6;
         private float _directionAdaptationRate = 0.1f; // 0-1
         private Vector3 _nextDestination;
@@ -17,35 +17,38 @@ namespace Something
         {
             _position = position;
             _direction = direction;
+            _direction.Normalize();
         }
      
         internal override void SelectDestination(Field[,,] env)
         {
-            // IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
-            // UpdateDirection(entities);
-            // _nextDestination = _position + _stepRange * _direction;
-            _position = new Vector3Int(_position.x+1, _position.y, _position.z);
+            IEnumerable<Entity> entities = GetNearbyEntities(env, _viewRange);
+            UpdateDirection(entities);
+            _nextDestination = _position + _stepRange * _direction;
         }
 
         internal override void StepIfAble(Field[,,] env)
         {
-            // Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
-            // Field closestField = env.GetField(closestPos);
-            // Field currentField = env.GetField(_position);
-            // currentField.Entity = null;
-            // if (closestField.Entity == null)
-            // {
-            //     closestField.Entity = this;
-            // }
-            // else
-            // {
-            //     // TODO blow up
-            //     currentField.Entity = this;
-            // }
+            Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
+            Field closestField = env.GetField(closestPos);
+            Field currentField = env.GetField(_position);
+            currentField.Entity = null;
+            if (closestField.Entity == null)
+            {
+                closestField.Entity = this;
+                _position = closestPos;
+            }
+            else
+            {
+                // TODO blow up
+                currentField.Entity = this;
+            }
         }
 
         private void UpdateDirection(IEnumerable<Entity> entities)
         {
+            if (entities.Count() == 0)
+                return;
             Vector3 dirSum = new Vector3(0f, 0f, 0f);
             foreach (Entity entity in entities)
                 dirSum += entity.Direction;
