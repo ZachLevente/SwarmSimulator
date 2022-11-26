@@ -89,7 +89,7 @@ namespace Something
                     posSum += entity.Position;
                 posSum += this._position;
                 Vector3 center = posSum / (closeEntities.Count()+1);
-                newDir += (center - _position) * _groupPull;
+                newDir += (center - _position).normalized * _groupPull;
             }
 
             newDir.Normalize();

@@ -1,6 +1,5 @@
 using Something.UI;
 using UnityEngine;
-using System;
 using System.IO;
 
 namespace Something.Controllers
@@ -52,7 +51,7 @@ namespace Something.Controllers
                     behaviour = defaultBehaviour;
                 }
                 Vector3Int pos = new Vector3Int(EntityData.X, EntityData.Y, EntityData.Z);
-                Vector3 dir = new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                Vector3 dir = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
                 dir.Normalize();
                 WorldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, behaviour));
             }

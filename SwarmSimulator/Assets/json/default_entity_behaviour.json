@@ -1,11 +1,11 @@
 {
     "Name": "default",
 
-    "StepRange" : 3.0,
-    "ViewRange" : 6,
-    "WallViewRange" : 6,
+    "StepRange": 2.0,
+    "ViewRange": 5,
+    "WallViewRange": 15,
 
-    "DirectionAdaptationRate" : 0.9,
-    "WallRepulsiveness" : 1.0,
-    "GroupPull" : 1.0
+    "DirectionAdaptationRate": 0.1,
+    "WallRepulsiveness": 0.1,
+    "GroupPull": 0.01
 }
