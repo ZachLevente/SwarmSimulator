@@ -69,13 +69,13 @@ namespace Something.Controllers
             return null;
         }
 
-        public void AddRandomBird(){
+        public void AddRandomBird() {
             Vector3Int pos = Vector3Int.zero;
             Vector3Int gridSize = _worldSpaceGridController.GetGrid().Size;
-            do{
-                pos.x = Random.Range(0, gridSize.x-1);
-                pos.y = Random.Range(0, gridSize.y-1);
-                pos.z = Random.Range(0, gridSize.z-1);
+            do {
+                pos.x = Random.Range(0, gridSize.x);
+                pos.y = Random.Range(0, gridSize.y);
+                pos.z = Random.Range(0, gridSize.z);
             } while(_worldSpaceGridController.GetGrid().Fields[pos.x, pos.y, pos.z].Entity != null);
             
             Vector3 dir = Random.insideUnitSphere;
