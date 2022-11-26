@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3476215228940207335, guid: 7e53513dff69f83499dc42ef3cd0fa8c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476215228940207335, guid: 7e53513dff69f83499dc42ef3cd0fa8c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476215228940207335, guid: 7e53513dff69f83499dc42ef3cd0fa8c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 7666597996988758899, guid: 7e53513dff69f83499dc42ef3cd0fa8c, type: 3}
       propertyPath: m_Name
       value: Cone
