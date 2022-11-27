@@ -7,7 +7,7 @@ namespace Something.UI
 {
     public class UiController : MonoBehaviour
     {
-        [SerializeField] private Vector3InputPanel vec3popup;
+        [SerializeField] private BirdDataInputPanel vec3popup;
         [SerializeField] private Button OkButton;
         [SerializeField] private TMP_Text ContinueButtonText;
         
@@ -21,28 +21,39 @@ namespace Something.UI
             OkButton.onClick.AddListener(CloseEntityPopup);
         }
 
-        public void CloseEntityPopup()
-        {
-            modifiedEntity = null;
-            vec3popup.gameObject.SetActive(false);
-        }
-        
-        public void ShowEntityPopup(BirdObjectController entity)
+        #region Bird management popup
+
+        public void BirdSelected(BirdObjectController entity)
         {
             modifiedEntity = entity;
-            vec3popup.SetAllowDecimals(false);
-            vec3popup.DisplayValue(entity.Brain.Position, "Position:");
+            ShowEntityPositionPopup(modifiedEntity);
+        }
+        
+        private void ShowEntityPositionPopup(BirdObjectController entity)
+        {
+            vec3popup.DisplayValue(entity.Brain.Position, entity.Brain.Behaviour);
             vec3popup.gameObject.SetActive(true);
         }
 
-        public void SaveModifications()
+        private void SaveModifications()
         {
             if (modifiedEntity is not null)
             {
                 modifiedEntity.Brain.Position = vec3popup.GetIntegerData();
+                modifiedEntity.Brain.Behaviour = vec3popup.GetSelectedBehaviour();
                 modifiedEntity.Move();
             }
         }
+        
+        private void CloseEntityPopup()
+        {
+            modifiedEntity = null;
+            vec3popup.gameObject.SetActive(false);
+        }
+
+        #endregion
+
+        #region Game continuity
 
         public void ToggleGameContinuity()
         {
@@ -50,5 +61,7 @@ namespace Something.UI
             ContinueButtonText.text = continous ? "Pause" : "Continue";
             GameManager.Instance.GameUpdateController.SetAutoStep(continous);
         }
+
+        #endregion
     }
 }

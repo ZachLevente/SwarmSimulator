@@ -6,7 +6,7 @@ namespace Something.UI
     {
         public static void BirdClicked(BirdObjectController entity)
         {
-            GameManager.Instance.UiController.ShowEntityPopup(entity);
+            GameManager.Instance.UiController.BirdSelected(entity);
         }
     }
 }

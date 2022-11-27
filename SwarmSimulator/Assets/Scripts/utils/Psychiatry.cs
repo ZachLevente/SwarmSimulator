@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Something;
 
 namespace utils
@@ -18,12 +19,19 @@ namespace utils
             return behaviour ?? _default;
         }
 
+        public List<string> GetBehaviourNames() => _behaviours.Keys.ToList();
+
         public void Initialize(IEnumerable<EntityBehaviour> behaviours)
         {
             _behaviours = new();
             foreach (var entityBehaviour in behaviours)
             {
                 RegisterBehaviour(entityBehaviour);
+            }
+
+            if (_default is not null)
+            {
+                RegisterBehaviour(_default);
             }
         }
         
