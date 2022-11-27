@@ -1,6 +1,7 @@
 using Something.UI;
 using UnityEngine;
 using System.IO;
+using utils;
 
 namespace Something.Controllers
 {
@@ -18,33 +19,38 @@ namespace Something.Controllers
         public UiController UiController => _uiController;
         private UiController _uiController;
 
-        private BirdFactory _birdFactory;
+        public Psychiatry Psychiatry => _psychiatry;
+        private Psychiatry _psychiatry;
 
-        private void Start()
+        private void Awake()
         {
             _instance = this;
             _worldSpaceGridController = GetComponentInChildren<WorldSpaceGridController>();            
             _gameUpdateController = GetComponentInChildren<GameUpdateController>();
             _uiController = GetComponentInChildren<UiController>();
-            _birdFactory = new BirdFactory(_worldSpaceGridController);
+            _psychiatry = new Psychiatry();
         }
 
         public void StartNewGame()
         {
-            
+            Psychiatry.SetAsDefault("Assets/json/default_entity_behaviour.json");
             string jsonString = File.ReadAllText ("Assets/json/env.json");
             Environment env = Environment.CreateFromJSON(jsonString);
             env.validate();
+            Psychiatry.Initialize(env.Behaviours);
 
             WorldSpaceGridController.CreateNewGrid(env.X, env.Y, env.Z);
-
-            _birdFactory.Start(env);
+            BirdFactory.PopulateEnvironment(env, WorldSpaceGridController);
 
             GameUpdateController.SetGameState(WorldSpaceGridController.GetGrid());
         }
 
-        public void AddRandomBird(){
-            _birdFactory.AddRandomBird();
+        public void AddRandomBird()
+        {
+            var freeSpots = WorldSpaceGridController.GetGrid().FindEmptyPositions();
+            var position = freeSpots[Random.Range(0, freeSpots.Count-1)];
+            var bird = BirdFactory.CreateRandomBird(position);
+            WorldSpaceGridController.AddEntity(bird);
         }
     }
 }
