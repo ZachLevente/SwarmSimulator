@@ -6,13 +6,26 @@ using UnityEngine;
 namespace Something
 {
     [Serializable]
-    public class ConcreteEntity : Entity
+    public class Entity
     {
-        EntityBehaviour _behaviour;
+        [SerializeField] protected Vector3Int _position;
+        [SerializeField] protected Vector3 _direction;
+
+        public Vector3Int Position 
+        { 
+            get => _position;
+            set => _position = value;
+        }
+        public Vector3 Direction
+        {
+            get => _direction;
+            set => _direction = value;
+        }
+        private EntityBehaviour _behaviour;
         private Vector3 _nextDestination;
         private Vector3 _nextDirection;
 
-        public ConcreteEntity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
+        public Entity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
         {
             _position = position;
             _direction = direction;
@@ -20,13 +33,13 @@ namespace Something
             _direction.Normalize();
         }
      
-        internal override void SelectDestination(Field[,,] env)
+        internal void SelectDestination(Field[,,] env)
         {
             _nextDirection = CalculateNextDirection(env);
             _nextDestination = _position + _behaviour.StepRange * _direction;
         }
 
-        internal override void StepIfAble(Field[,,] env)
+        internal void StepIfAble(Field[,,] env)
         {
             Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
             env.ClampCoords(ref closestPos);
