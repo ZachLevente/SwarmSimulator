@@ -24,6 +24,11 @@ namespace Something
             get => _direction;
             set => _direction = value;
         }
+        public EntityBehaviour Behaviour
+        {
+            get => _behaviour;
+            set => _behaviour = value;
+        }
 
         public Entity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
         {

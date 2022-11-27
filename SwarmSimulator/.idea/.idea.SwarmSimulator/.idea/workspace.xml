@@ -3,9 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="e0c552f4-ee9e-40b2-85e4-22c05d5e8c77" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SwarmSimulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SwarmSimulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/CameraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imported/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Imported/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/--- Swarm Simulator ---.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/--- Swarm Simulator ---.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/---UI---.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/---UI---.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Vector3 Input Panel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Vector3 Input Panel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LeviTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LeviTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/UiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/UiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/Vector3InputPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/BirdDataInputPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/Vector3InputPanel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/UI/BirdDataInputPanel.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/models/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/WorldSpaceGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/models/WorldSpaceGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/utils/BirdClickHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/utils/BirdClickHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/utils/Psychiatry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/utils/Psychiatry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/json/env.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/json/env.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +32,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bae255e3e08e46f7bc2fbd23dde96338158800/f9/06e9f793/Behaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/22/e14b8892/Vector3Int.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/46/fcd8b85b/SerializeField.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/89/acf82647/Random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/b9/67e3db8b/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/d7/184760c5/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/utils/ExtensionMethods.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,10 +80,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16004">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="16004" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
