@@ -27,7 +27,7 @@ namespace Something
                 Vector3Int pos = new Vector3Int(EntityData.X, EntityData.Y, EntityData.Z);
                 Vector3 dir = Random.insideUnitSphere;
                 dir.Normalize();
-                _worldSpaceGridController.AddEntity(new ConcreteEntity(pos, dir, behaviour));
+                _worldSpaceGridController.AddEntity(new Entity(pos, dir, behaviour));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Something
             Vector3 dir = Random.insideUnitSphere;
             dir.Normalize();
 
-            _worldSpaceGridController.AddEntity(new ConcreteEntity(chosen, dir, _defaultBehaviour));
+            _worldSpaceGridController.AddEntity(new Entity(chosen, dir, _defaultBehaviour));
         }
 
         private List<Vector3Int> FindEmptySpots(Field[,,] fields){

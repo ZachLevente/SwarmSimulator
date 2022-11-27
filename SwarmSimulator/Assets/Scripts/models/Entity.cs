@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Something
 {
     [Serializable]
-    public abstract class Entity
+    public class Entity
     {
         [SerializeField] protected Vector3Int _position;
         [SerializeField] protected Vector3 _direction;
@@ -19,9 +21,114 @@ namespace Something
             get => _direction;
             set => _direction = value;
         }
+        private EntityBehaviour _behaviour;
+        private Vector3 _nextDestination;
+        private Vector3 _nextDirection;
 
-        internal abstract void SelectDestination(Field[,,] env);
+        public Entity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
+        {
+            _position = position;
+            _direction = direction;
+            _behaviour = behaviour;
+            _direction.Normalize();
+        }
+     
+        internal void SelectDestination(Field[,,] env)
+        {
+            _nextDirection = CalculateNextDirection(env);
+            _nextDestination = _position + _behaviour.StepRange * _direction;
+        }
 
-        internal abstract void StepIfAble(Field[,,] env);
+        internal void StepIfAble(Field[,,] env)
+        {
+            Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
+            env.ClampCoords(ref closestPos);
+            Field closestField = env.GetField(closestPos);
+            Field currentField = env.GetField(_position);
+            currentField.Entity = null;
+            _direction =_nextDirection;
+
+            if (closestField.Entity == null)
+            {
+                closestField.Entity = this;
+                _position = closestPos;
+            }
+            else
+            {
+                // TODO blow up
+                currentField.Entity = this;
+            }
+        }
+
+        private Vector3 CalculateNextDirection(Field[,,] env)
+        {
+            Vector3 newDir = _direction;
+
+            // Direction of close entities
+            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(env, _behaviour.ViewRange);
+            if (closeEntities.Count() > 0)
+            {
+                Vector3 dirSum = Vector3.zero;
+                foreach (Entity entity in closeEntities)
+                    dirSum += entity.Direction;
+                dirSum /= closeEntities.Count();
+                newDir = dirSum * _behaviour.DirectionAdaptationRate + newDir * (1.0f - _behaviour.DirectionAdaptationRate);
+            }
+
+            // Walls
+            Vector3 wallPushBack = Vector3.zero;
+            wallPushBack.x = GetWallPushBack(_position.x, 0, env.GetLength(0));
+            wallPushBack.y = GetWallPushBack(_position.y, 0, env.GetLength(1));
+            wallPushBack.z = GetWallPushBack(_position.z, 0, env.GetLength(2));
+            newDir += _behaviour.WallRepulsiveness * wallPushBack;
+
+            // NOTE Could work with real groups instead of close entities
+            // NOTE Can be merged with direction part for better performance if needed
+            // Center of group (close entities)
+            if (closeEntities.Count() > 0)
+            {
+                Vector3 posSum = Vector3.zero;
+                foreach (Entity entity in closeEntities)
+                    posSum += entity.Position;
+                posSum += this._position;
+                Vector3 center = posSum / (closeEntities.Count()+1);
+                newDir += (center - _position).normalized * _behaviour.GroupPull;
+            }
+
+            newDir.Normalize();
+            return newDir;
+        }
+
+        private int GetWallPushBack(int value, int min, int max)
+        {
+            int push = 0;
+            if (value + _behaviour.WallViewRange > max)
+                push = max - (value + _behaviour.WallViewRange);
+            if (value - _behaviour.WallViewRange < min)
+                push = min - (value - _behaviour.WallViewRange);
+            
+            bool negative = push < 0;
+            push = push * push;
+            if (negative)
+                return -push;
+            else
+                return push;
+        }
+
+        private IEnumerable<Entity> GetOtherNearbyEntities(Field[,,] env, int boxSize)
+        {
+            List<Entity> results = new List<Entity>();
+            int fromX=Math.Max(0, _position.x - boxSize), toX=Math.Min(env.GetLength(0) - 1, _position.x + boxSize);
+            int fromY=Math.Max(0, _position.y - boxSize), toY=Math.Min(env.GetLength(1) - 1, _position.y + boxSize);
+            int fromZ=Math.Max(0, _position.z - boxSize), toZ=Math.Min(env.GetLength(2) - 1, _position.z + boxSize);
+
+            for (int i = fromX; i <= toX; i++)
+                for (int j = fromY; j <= toY; j++)
+                    for (int k = fromZ; k <= toZ; k++)
+                        if (env[i,j,k].Entity != null)
+                            results.Add(env[i,j,k].Entity);
+            results.Remove(this);
+            return results;
+        }
     }
 }
