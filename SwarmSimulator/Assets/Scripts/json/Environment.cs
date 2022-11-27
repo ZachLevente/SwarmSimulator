@@ -16,10 +16,13 @@ namespace Something
 
         public int X, Y, Z;
         
-        public static Environment CreateFromJSON(string jsonString){
+        public static Environment CreateFromJSON(string jsonString) {
             return JsonUtility.FromJson<Environment>(jsonString);
         }
-        public void validate(){
+        
+        // TODO
+        public void validate()
+        {
             if (X<=0)
                 throw new EnvironmentValidationException("X must be >0");
             if (Y<=0)

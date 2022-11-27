@@ -1,10 +1,12 @@
 using System;
+using Something.Controllers;
 using UnityEngine;
+using utils;
 
 namespace Something
 {
 
-    internal class EntityBehaviourValidationException: Exception{
+    public class EntityBehaviourValidationException: Exception {
         internal EntityBehaviourValidationException(string msg): base(msg){ }
     }
 
@@ -18,12 +20,15 @@ namespace Something
         public float DirectionAdaptationRate; // 0-1
         public float WallRepulsiveness;
         public float GroupPull;
-
+        
         public static EntityBehaviour CreateFromJSON(string jsonString)
         {
-            return JsonUtility.FromJson<EntityBehaviour>(jsonString);
+            var beh = JsonUtility.FromJson<EntityBehaviour>(jsonString);
+            GameManager.Instance.Psychiatry.RegisterBehaviour(beh);
+            return beh;
         }
 
+        // TODO
         public void validate(){
             if(StepRange < 0)
                 throw new EntityBehaviourValidationException("StepRange has to be >=0.");

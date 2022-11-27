@@ -53,7 +53,6 @@ namespace Something
             }
             else
             {
-                // TODO blow up
                 env[_position.x, _position.y, _position.z] = this;
             }
         }
