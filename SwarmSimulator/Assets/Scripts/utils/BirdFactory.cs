@@ -39,7 +39,7 @@ namespace Something
         }
 
         public void AddRandomBird(){
-            Field[,,] fields = _worldSpaceGridController.GetGrid().Fields;
+            Entity[,,] fields = _worldSpaceGridController.GetGrid().Fields;
             List<Vector3Int> freeSpots = FindEmptySpots(fields);
             if (freeSpots.Count <= 0)
                 return;
@@ -52,12 +52,12 @@ namespace Something
             _worldSpaceGridController.AddEntity(new Entity(chosen, dir, _defaultBehaviour));
         }
 
-        private List<Vector3Int> FindEmptySpots(Field[,,] fields){
+        private List<Vector3Int> FindEmptySpots(Entity[,,] fields){
             List<Vector3Int> results = new List<Vector3Int>();
             for (int i = 0; i < fields.GetLength(0); i++)
                 for (int j = 0; j < fields.GetLength(1); j++)
                     for (int k = 0; k < fields.GetLength(2); k++)
-                        if (fields[i, j, k].Entity == null)
+                        if (fields[i, j, k] == null)
                             results.Add(new Vector3Int(i, j, k));
             return results;
         }

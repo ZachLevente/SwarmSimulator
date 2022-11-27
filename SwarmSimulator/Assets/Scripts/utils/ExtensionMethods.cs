@@ -5,11 +5,7 @@ using Random = UnityEngine.Random;
 
 public static class ExtensionMethods
 {
-    public static Field GetField(this Field[,,] env, Vector3Int coords ){
-        return env[coords.x, coords.y, coords.z];
-    }
-
-    public static void ClampCoords(this Field[,,] env, ref Vector3Int coords ){
+    public static void ClampCoords(this Entity[,,] env, ref Vector3Int coords ){
         coords.x = Math.Min(Math.Max(coords.x, 0), env.GetLength(0)-1);
         coords.y = Math.Min(Math.Max(coords.y, 0), env.GetLength(1)-1);
         coords.z = Math.Min(Math.Max(coords.z, 0), env.GetLength(2)-1);

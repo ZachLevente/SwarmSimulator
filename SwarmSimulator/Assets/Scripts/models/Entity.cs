@@ -33,34 +33,33 @@ namespace Something
             _direction.Normalize();
         }
      
-        internal void SelectDestination(Field[,,] env, IEnumerable<Entity> entities)
+        internal void SelectDestination(Entity[,,] env, IEnumerable<Entity> entities)
         {
             _nextDirection = CalculateNextDirection(env, entities);
             _nextDestination = _position + _behaviour.StepRange * _direction;
         }
 
-        internal void StepIfAble(Field[,,] env)
+        internal void StepIfAble(Entity[,,] env)
         {
             Vector3Int closestPos = Vector3Int.RoundToInt(_nextDestination);
             env.ClampCoords(ref closestPos);
-            Field closestField = env.GetField(closestPos);
-            Field currentField = env.GetField(_position);
-            currentField.Entity = null;
+            Entity closestField = env[closestPos.x, closestPos.y, closestPos.z];
+            env[_position.x, _position.y, _position.z] = null;
             _direction =_nextDirection;
 
-            if (closestField.Entity == null)
+            if (closestField == null)
             {
-                closestField.Entity = this;
+                env[closestPos.x, closestPos.y, closestPos.z] = this;
                 _position = closestPos;
             }
             else
             {
                 // TODO blow up
-                currentField.Entity = this;
+                env[_position.x, _position.y, _position.z] = this;
             }
         }
 
-        private Vector3 CalculateNextDirection(Field[,,] env, IEnumerable<Entity> entities)
+        private Vector3 CalculateNextDirection(Entity[,,] env, IEnumerable<Entity> entities)
         {
             Vector3 newDir = _direction;
 
