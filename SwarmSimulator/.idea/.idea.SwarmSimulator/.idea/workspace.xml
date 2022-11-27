@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e0c552f4-ee9e-40b2-85e4-22c05d5e8c77" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SwarmSimulator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SwarmSimulator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/GameUpdateController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/GameUpdateController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/Controller.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/Controller.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviours/CameraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/models/Entity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/models/WorldSpaceGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/models/WorldSpaceGrid.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,6 +25,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/46/fcd8b85b/SerializeField.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/b9/67e3db8b/Vector3.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f3c8c2cd984e42559705760d0ebf7326135818/d7/184760c5/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/utils/ExtensionMethods.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -92,7 +92,7 @@
       <workItem from="1669395901868" duration="123000" />
       <workItem from="1669396048723" duration="535000" />
       <workItem from="1669405999771" duration="22307000" />
-      <workItem from="1669539810380" duration="5784000" />
+      <workItem from="1669539810380" duration="6374000" />
     </task>
     <servers />
   </component>

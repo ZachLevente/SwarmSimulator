@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace Something
 {
-    [Serializable]
     public class Entity
     {
-        [SerializeField] protected Vector3Int _position;
-        [SerializeField] protected Vector3 _direction;
+        protected Vector3Int _position;
+        protected Vector3 _direction;
 
         public Vector3Int Position 
         { 

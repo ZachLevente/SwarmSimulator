@@ -1,24 +1,16 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Something
 {
-    [Serializable]
     public class WorldSpaceGrid
     {
-        [SerializeField] private readonly Entity[,,] _field;
-        [SerializeField] private readonly List<Entity> _entities = new();
+        private readonly Entity[,,] _field;
+        private readonly List<Entity> _entities = new();
 
-        //TODO should be a read-only copy
         public Entity[,,] Fields => _field;
-
-        public Vector3Int Size => _size;
-        private Vector3Int _size;
 
         public WorldSpaceGrid(int x, int y, int z)
         {
-            _size = new Vector3Int(x, y, z);
             _field = new Entity[x,y,z];
         }
 
