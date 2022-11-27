@@ -2,7 +2,7 @@
     "Name": "default",
 
     "StepRange": 2.0,
-    "ViewRange": 5,
+    "ViewRange": 15.0,
     "WallViewRange": 10,
 
     "DirectionAdaptationRate": 0.1,

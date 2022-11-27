@@ -13,7 +13,7 @@ namespace Something
     {
         public string Name;
         public float StepRange;
-        public int ViewRange;
+        public float ViewRange;
         public int WallViewRange;
         public float DirectionAdaptationRate; // 0-1
         public float WallRepulsiveness;

@@ -6,7 +6,7 @@ random.seed(42)
 
 taken: set[tuple[int, int, int]] = set()
 cnt = 0
-while cnt < 2000:
+while cnt < 1000:
     rx = random.randrange(0, x)
     ry = random.randrange(0, y)
     rz = random.randrange(0, z)
