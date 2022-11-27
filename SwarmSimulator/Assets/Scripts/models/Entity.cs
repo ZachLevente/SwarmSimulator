@@ -7,6 +7,10 @@ namespace Something
 {
     public class Entity
     {
+        private EntityBehaviour _behaviour;
+        private Vector3 _nextDestination;
+        private Vector3 _nextDirection;
+        
         protected Vector3Int _position;
         protected Vector3 _direction;
 
@@ -20,9 +24,6 @@ namespace Something
             get => _direction;
             set => _direction = value;
         }
-        private EntityBehaviour _behaviour;
-        private Vector3 _nextDestination;
-        private Vector3 _nextDirection;
 
         public Entity(Vector3Int position, Vector3 direction, EntityBehaviour behaviour)
         {
