@@ -8,12 +8,7 @@ namespace Something
     [Serializable]
     public class ConcreteEntity : Entity
     {
-        private float _stepRange;
-        private int _viewRange;
-        private int _wallViewRange;
-        private float _directionAdaptationRate; // 0-1
-        private float _wallRepulsiveness;
-        private float _groupPull;
+        EntityBehaviour _behaviour;
         private Vector3 _nextDestination;
         private Vector3 _nextDirection;
 
@@ -21,19 +16,14 @@ namespace Something
         {
             _position = position;
             _direction = direction;
-            _stepRange = behaviour.StepRange;
-            _viewRange = behaviour.ViewRange;
-            _wallViewRange = behaviour.WallViewRange;
-            _directionAdaptationRate = behaviour.DirectionAdaptationRate;
-            _wallRepulsiveness = behaviour.WallRepulsiveness;
-            _groupPull = behaviour.GroupPull;
+            _behaviour = behaviour;
             _direction.Normalize();
         }
      
         internal override void SelectDestination(Field[,,] env)
         {
             _nextDirection = CalculateNextDirection(env);
-            _nextDestination = _position + _stepRange * _direction;
+            _nextDestination = _position + _behaviour.StepRange * _direction;
         }
 
         internal override void StepIfAble(Field[,,] env)
@@ -62,14 +52,14 @@ namespace Something
             Vector3 newDir = _direction;
 
             // Direction of close entities
-            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(env, _viewRange);
+            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(env, _behaviour.ViewRange);
             if (closeEntities.Count() > 0)
             {
                 Vector3 dirSum = Vector3.zero;
                 foreach (Entity entity in closeEntities)
                     dirSum += entity.Direction;
                 dirSum /= closeEntities.Count();
-                newDir = dirSum * _directionAdaptationRate + newDir * (1.0f - _directionAdaptationRate);
+                newDir = dirSum * _behaviour.DirectionAdaptationRate + newDir * (1.0f - _behaviour.DirectionAdaptationRate);
             }
 
             // Walls
@@ -77,7 +67,7 @@ namespace Something
             wallPushBack.x = GetWallPushBack(_position.x, 0, env.GetLength(0));
             wallPushBack.y = GetWallPushBack(_position.y, 0, env.GetLength(1));
             wallPushBack.z = GetWallPushBack(_position.z, 0, env.GetLength(2));
-            newDir += _wallRepulsiveness * wallPushBack;
+            newDir += _behaviour.WallRepulsiveness * wallPushBack;
 
             // NOTE Could work with real groups instead of close entities
             // NOTE Can be merged with direction part for better performance if needed
@@ -89,7 +79,7 @@ namespace Something
                     posSum += entity.Position;
                 posSum += this._position;
                 Vector3 center = posSum / (closeEntities.Count()+1);
-                newDir += (center - _position).normalized * _groupPull;
+                newDir += (center - _position).normalized * _behaviour.GroupPull;
             }
 
             newDir.Normalize();
@@ -99,10 +89,10 @@ namespace Something
         private int GetWallPushBack(int value, int min, int max)
         {
             int push = 0;
-            if (value + _wallViewRange > max)
-                push = max - (value + _wallViewRange);
-            if (value - _wallViewRange < min)
-                push = min - (value - _wallViewRange);
+            if (value + _behaviour.WallViewRange > max)
+                push = max - (value + _behaviour.WallViewRange);
+            if (value - _behaviour.WallViewRange < min)
+                push = min - (value - _behaviour.WallViewRange);
             
             bool negative = push < 0;
             push = push * push;
