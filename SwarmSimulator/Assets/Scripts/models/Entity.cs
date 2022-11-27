@@ -64,7 +64,7 @@ namespace Something
             Vector3 newDir = _direction;
 
             // Direction of close entities
-            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(entities, _behaviour.ViewRange);
+            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(entities);
             if (closeEntities.Count() > 0)
             {
                 Vector3 dirSum = Vector3.zero;
@@ -114,7 +114,7 @@ namespace Something
                 return push;
         }
 
-        private List<Entity> GetOtherNearbyEntities(IEnumerable<Entity> entities, int boxSize)
+        private List<Entity> GetOtherNearbyEntities(IEnumerable<Entity> entities)
         {
             List<Entity> results = new List<Entity>();
             foreach (var entity in entities)
