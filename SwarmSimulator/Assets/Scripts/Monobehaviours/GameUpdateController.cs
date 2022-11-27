@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Something.Controllers
@@ -7,17 +6,17 @@ namespace Something.Controllers
     public class GameUpdateController : MonoBehaviour
     {
         [SerializeField] private float updateTime = 1.0f;
-        private Controller _controller;
+        private WorldSpaceGrid _model;
         private Coroutine _lööp = null;
 
         public void SetGameState(WorldSpaceGrid grid)
         {
-            _controller = new Controller(grid);
+            _model = grid;
         }
         
         public void Step()
         {
-            _controller.Step();
+            _model.Step();
             BirdObjectController.MoveAllBirds();
         }
 

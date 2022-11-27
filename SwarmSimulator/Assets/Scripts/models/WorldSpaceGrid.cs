@@ -34,11 +34,6 @@ namespace Something
                 entity.StepIfAble(_fields);
         }
 
-        internal void Reset()
-        {
-            
-        }
-
         internal void AddEntity(Entity entity)
         {
             _entities.Add(entity);
