@@ -33,9 +33,9 @@ namespace Something
             _direction.Normalize();
         }
      
-        internal void SelectDestination(Field[,,] env)
+        internal void SelectDestination(Field[,,] env, IEnumerable<Entity> entities)
         {
-            _nextDirection = CalculateNextDirection(env);
+            _nextDirection = CalculateNextDirection(env, entities);
             _nextDestination = _position + _behaviour.StepRange * _direction;
         }
 
@@ -60,12 +60,12 @@ namespace Something
             }
         }
 
-        private Vector3 CalculateNextDirection(Field[,,] env)
+        private Vector3 CalculateNextDirection(Field[,,] env, IEnumerable<Entity> entities)
         {
             Vector3 newDir = _direction;
 
             // Direction of close entities
-            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(env, _behaviour.ViewRange);
+            IEnumerable<Entity> closeEntities = GetOtherNearbyEntities(entities, _behaviour.ViewRange);
             if (closeEntities.Count() > 0)
             {
                 Vector3 dirSum = Vector3.zero;
@@ -115,18 +115,15 @@ namespace Something
                 return push;
         }
 
-        private IEnumerable<Entity> GetOtherNearbyEntities(Field[,,] env, int boxSize)
+        private List<Entity> GetOtherNearbyEntities(IEnumerable<Entity> entities, int boxSize)
         {
             List<Entity> results = new List<Entity>();
-            int fromX=Math.Max(0, _position.x - boxSize), toX=Math.Min(env.GetLength(0) - 1, _position.x + boxSize);
-            int fromY=Math.Max(0, _position.y - boxSize), toY=Math.Min(env.GetLength(1) - 1, _position.y + boxSize);
-            int fromZ=Math.Max(0, _position.z - boxSize), toZ=Math.Min(env.GetLength(2) - 1, _position.z + boxSize);
-
-            for (int i = fromX; i <= toX; i++)
-                for (int j = fromY; j <= toY; j++)
-                    for (int k = fromZ; k <= toZ; k++)
-                        if (env[i,j,k].Entity != null)
-                            results.Add(env[i,j,k].Entity);
+            foreach (var entity in entities)
+            {
+                float distance = Vector3.Distance(_position, entity.Position);
+                if (distance < _behaviour.ViewRange)
+                    results.Add(entity);
+            }         
             results.Remove(this);
             return results;
         }

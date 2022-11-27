@@ -29,7 +29,7 @@ namespace Something
         internal void Step()
         {
             foreach (var entity in _entities)
-                entity.SelectDestination(_fields);
+                entity.SelectDestination(_fields, _entities);
             foreach (var entity in _entities)
                 entity.StepIfAble(_fields);
         }
