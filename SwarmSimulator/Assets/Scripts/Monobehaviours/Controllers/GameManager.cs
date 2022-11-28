@@ -37,8 +37,6 @@ namespace Something.Controllers
 
         public void StartNewGame()
         {
-            Debug.Log("Started");
-            
             string jsonString = File.ReadAllText(Environment.Selected);
             Environment env = Environment.CreateFromJSON(jsonString);
             env.validate();
@@ -49,7 +47,7 @@ namespace Something.Controllers
 
             GameUpdateController.SetGameState(WorldSpaceGridController.GetGrid());
 
-            cameraHolder.position = new Vector3(cameraHolder.position.x, env.Y/2, cameraHolder.position.y);
+            cameraHolder.position = new Vector3(cameraHolder.position.x, env.Y/2, cameraHolder.position.z);
         }
 
         public void AddRandomBird()
