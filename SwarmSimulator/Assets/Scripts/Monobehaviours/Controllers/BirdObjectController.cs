@@ -31,10 +31,7 @@ namespace Something.Controllers
 
         private void OnDisable() => _birds.Remove(this);
 
-        private void OnMouseDown()
-        {
-            BirdClickHandler.BirdClicked(this);
-        }
+        private void OnMouseDown() => GameManager.Instance.UiController.BirdSelected(this);
 
         #endregion
     }

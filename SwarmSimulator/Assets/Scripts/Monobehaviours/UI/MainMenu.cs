@@ -14,10 +14,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private TMP_Text errorMessgage;
 
+    private const string FolderName = "Environments";
     private const string NoEnvironmentsError = "There are no environment descriptors available\nAdd a file to /Environments/*.json";
-    //private const string ValidationError = "Not a valid environment description";
 
-    private string Selected => dropdown.options.Count == 0 ? "" : dropdown.options[dropdown.value].text;
+    private string Selected => dropdown.options.Count == 0 ? "" : FolderName + "/" + dropdown.options[dropdown.value].text;
 
     private void Start()
     {
@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
 
     private List<string> GetJsonFiles()
     {
-        return new DirectoryInfo("Environments")
+        return new DirectoryInfo(FolderName)
             .GetFiles()
             .Where(f => f.Extension == ".json")
             .Select(f =>f.Name)
