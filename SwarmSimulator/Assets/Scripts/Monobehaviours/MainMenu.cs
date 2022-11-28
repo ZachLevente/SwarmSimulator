@@ -14,30 +14,36 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropdown;
     [SerializeField] private TMP_Text errorMessgage;
 
+    private const string NoEnvironmentsError = "There are no environment descriptors available\nAdd a file to /Environments/*.json";
+    //private const string ValidationError = "Not a valid environment description";
+
+    private string Selected => dropdown.options.Count == 0 ? "" : dropdown.options[dropdown.value].text;
+
     private void Start()
     {
         startButton.onClick.AddListener(StartSimulation);
         exitButton.onClick.AddListener(Exit);
         
         dropdown.options.Clear();
-        dropdown.AddOptions(GetJsonFiles());
-
-        if (dropdown.options.Count == 0)
-        {
-            startButton.interactable = false;
-            errorMessgage.text = "There are no environment descriptors available\nAdd a file to /Environments/*.json";
-        }
-        else
-        {
-            startButton.interactable = true;
-            errorMessgage.text = "";
-        }
+        
+        UpdateDropdown(GetJsonFiles());
+        StartCoroutine(nameof(RefreshDropdown));
     }
 
     private void StartSimulation()
     {
-        Environment.Selected = dropdown.options[dropdown.value].text;
+        StopCoroutine(nameof(RefreshDropdown));
+        Environment.Selected = Selected;
         SceneManager.LoadScene("SwarmScene");
+    }
+
+    private IEnumerable<WaitForSeconds> RefreshDropdown()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5);
+            UpdateDropdown(GetJsonFiles());
+        }
     }
 
     private List<string> GetJsonFiles()
@@ -47,6 +53,40 @@ public class MainMenu : MonoBehaviour
             .Where(f => f.Extension == ".json")
             .Select(f =>f.Name)
             .ToList();
+    }
+
+    private void UpdateDropdown(List<string> existingFiles)
+    {
+        var lastselected = Selected;
+
+        // If the file is not available anymore, remove it
+        foreach (var entry in dropdown.options)
+        {
+            if (!existingFiles.Contains(entry.text))
+            {
+                dropdown.options.Remove(entry);
+            }
+        }
+        
+        // If a file is not listed, add it
+        foreach (var currentFile in existingFiles)
+        {
+            if (dropdown.options.All(o => o.text != currentFile))
+            {
+                dropdown.AddOptions(new List<string> {currentFile} );
+            }
+        }
+
+        if (dropdown.options.Count == 0)
+        {
+            startButton.interactable = false;
+            errorMessgage.text = NoEnvironmentsError;
+        }
+        else
+        {
+            startButton.interactable = true;
+            errorMessgage.text = "";
+        }
     }
 
     private void Exit()
