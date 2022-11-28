@@ -2016,7 +2016,7 @@ MonoBehaviour:
   startButton: {fileID: 341545074}
   exitButton: {fileID: 252696672}
   dropdown: {fileID: 49761952}
-  errorMessgage: {fileID: 1390795643}
+  errorMessage: {fileID: 1390795643}
 --- !u!114 &1806277971
 MonoBehaviour:
   m_ObjectHideFlags: 0

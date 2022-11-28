@@ -24,7 +24,7 @@ namespace Something.Controllers
         public Psychiatry Psychiatry => _psychiatry;
         private Psychiatry _psychiatry;
 
-        private void Awake()
+        private void Start()
         {
             _instance = this;
             _worldSpaceGridController = GetComponentInChildren<WorldSpaceGridController>();            

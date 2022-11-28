@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private TMP_Dropdown dropdown;
-    [SerializeField] private TMP_Text errorMessgage;
+    [SerializeField] private TMP_Text errorMessage;
 
     private const string FolderName = "Environments";
     private const string NoEnvironmentsError = "There are no environment descriptors available\nAdd a file to /Environments/*.json";
@@ -80,12 +80,12 @@ public class MainMenu : MonoBehaviour
         if (dropdown.options.Count == 0)
         {
             startButton.interactable = false;
-            errorMessgage.text = NoEnvironmentsError;
+            errorMessage.text = NoEnvironmentsError;
         }
         else
         {
             startButton.interactable = true;
-            errorMessgage.text = "";
+            errorMessage.text = "";
         }
     }
 
