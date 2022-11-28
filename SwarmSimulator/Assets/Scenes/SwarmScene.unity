@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: --- Swarm Simulator ---
       objectReference: {fileID: 0}
+    - target: {fileID: 3441399759366041151, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
+      propertyPath: cameraHolder
+      value: 
+      objectReference: {fileID: 1569513777}
     - target: {fileID: 8273120061845022330, guid: 57523fa84a8cc3c409d9ecf30c744453, type: 3}
       propertyPath: m_RootOrder
       value: 2

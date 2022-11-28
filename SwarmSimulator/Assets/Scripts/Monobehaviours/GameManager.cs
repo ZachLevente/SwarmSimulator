@@ -7,6 +7,8 @@ namespace Something.Controllers
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private Transform cameraHolder;
+        
         public static GameManager Instance => _instance;
         private static GameManager _instance;
 
@@ -43,6 +45,8 @@ namespace Something.Controllers
             BirdFactory.PopulateEnvironment(env, WorldSpaceGridController);
 
             GameUpdateController.SetGameState(WorldSpaceGridController.GetGrid());
+
+            cameraHolder.position = new Vector3(cameraHolder.position.x, env.Y/2, cameraHolder.position.y);
         }
 
         public void AddRandomBird()
