@@ -11,6 +11,8 @@ namespace Something
     [Serializable]
     public class Environment
     {
+        public static string Selected;
+        
         public EntityBehaviour[] Behaviours;
         public EntityData[] Entities;
 

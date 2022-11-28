@@ -1,6 +1,7 @@
 using Something.Controllers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Something.UI
@@ -9,6 +10,7 @@ namespace Something.UI
     {
         [SerializeField] private BirdDataInputPanel vec3popup;
         [SerializeField] private Button OkButton;
+        [SerializeField] private Button MenuButton;
         [SerializeField] private TMP_Text ContinueButtonText;
         
         private BirdObjectController modifiedEntity = null;
@@ -19,6 +21,7 @@ namespace Something.UI
         {
             OkButton.onClick.AddListener(SaveModifications);
             OkButton.onClick.AddListener(CloseEntityPopup);
+            MenuButton.onClick.AddListener(BackToMenu);
         }
 
         #region Bird management popup
@@ -63,5 +66,10 @@ namespace Something.UI
         }
 
         #endregion
+
+        private void BackToMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

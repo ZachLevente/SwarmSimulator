@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Something;
 
@@ -8,11 +7,19 @@ namespace utils
     public class Psychiatry
     {
         private Dictionary<string, EntityBehaviour> _behaviours = new();
-        private EntityBehaviour _default;
+        private EntityBehaviour _default = new()
+        {
+            Name = "Default",
+            StepRange = 2,
+            ViewRange = 15,
+            WallViewRange = 10,
+            DirectionAdaptationRate = 0.1f,
+            GroupPull = 0.1f,
+            WallRepulsiveness = 0.1f,
+        };
         
         public EntityBehaviour Default => _default;
 
-        
         public EntityBehaviour GetBehaviour(string name)
         {
             _behaviours.TryGetValue(name, out var behaviour);
@@ -20,48 +27,21 @@ namespace utils
         }
 
         public List<string> GetBehaviourNames() => _behaviours.Keys.ToList();
+        
+        public void RegisterBehaviour(EntityBehaviour behaviour) => _behaviours.Add(behaviour.Name, behaviour);
 
         public void Initialize(IEnumerable<EntityBehaviour> behaviours)
         {
             _behaviours = new();
-            foreach (var entityBehaviour in behaviours)
-            {
-                RegisterBehaviour(entityBehaviour);
-            }
-
+            
             if (_default is not null)
             {
                 RegisterBehaviour(_default);
             }
-        }
-        
-        public bool RegisterBehaviour(EntityBehaviour behaviour)
-        {
-            if (_behaviours.ContainsKey(behaviour.Name))
+            foreach (var entityBehaviour in behaviours)
             {
-                return false;
+                RegisterBehaviour(entityBehaviour);
             }
-            
-            _behaviours.Add(behaviour.Name, behaviour);
-            return true;
-        }
-
-        public void SetAsDefault(EntityBehaviour behaviour)
-        {
-            if (!_behaviours.ContainsKey(behaviour.Name))
-            {
-                RegisterBehaviour(behaviour);
-            }
-            
-            _default = behaviour;
-        }
-
-        public void SetAsDefault(string file)
-        {
-            string jsonString = File.ReadAllText (file);
-            var defaultBehaviour = EntityBehaviour.CreateFromJSON(jsonString);
-            defaultBehaviour.validate();
-            SetAsDefault(defaultBehaviour);
         }
     }
 }

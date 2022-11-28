@@ -35,8 +35,7 @@ namespace Something.Controllers
 
         public void StartNewGame()
         {
-            Psychiatry.SetAsDefault("Assets/json/default_entity_behaviour.json");
-            string jsonString = File.ReadAllText ("Assets/json/env.json");
+            string jsonString = File.ReadAllText(Environment.Selected);
             Environment env = Environment.CreateFromJSON(jsonString);
             env.validate();
             Psychiatry.Initialize(env.Behaviours);
