@@ -31,10 +31,14 @@ namespace Something.Controllers
             _gameUpdateController = GetComponentInChildren<GameUpdateController>();
             _uiController = GetComponentInChildren<UiController>();
             _psychiatry = new Psychiatry();
+            
+            StartNewGame();
         }
 
         public void StartNewGame()
         {
+            Debug.Log("Started");
+            
             string jsonString = File.ReadAllText(Environment.Selected);
             Environment env = Environment.CreateFromJSON(jsonString);
             env.validate();
